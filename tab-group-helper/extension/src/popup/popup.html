@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tab Group Helper</title>
+    <link rel="stylesheet" href="./popup.css">
+  </head>
+  <body>
+    <main class="popup">
+      <h1>Tab Group Helper</h1>
+      <label class="switch">
+        <input id="autoGroupEnabled" type="checkbox">
+        <span>启用自动分组</span>
+      </label>
+
+      <section class="info">
+        <div class="label">当前命中</div>
+        <div id="matchInfo" class="value">加载中...</div>
+      </section>
+
+      <section class="actions">
+        <button id="organizeCurrent">整理当前窗口</button>
+        <button id="organizeAll">整理全部窗口</button>
+        <button id="openOptions">打开配置</button>
+      </section>
+
+      <p id="status" class="status"></p>
+    </main>
+    <script src="../shared/constants.js"></script>
+    <script src="./popup.js"></script>
+  </body>
+</html>

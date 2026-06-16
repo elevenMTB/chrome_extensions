@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chrome 代理管理器</title>
+    <link rel="stylesheet" href="./popup.css">
+  </head>
+  <body>
+    <main class="popup">
+      <header class="header">
+        <div>
+          <h1>Chrome 代理管理器</h1>
+          <p id="statusText">正在读取配置...</p>
+        </div>
+        <label class="switch">
+          <input id="enabledInput" type="checkbox">
+          <span></span>
+        </label>
+      </header>
+
+      <section class="card">
+        <label for="modeInput">运行模式</label>
+        <select id="modeInput">
+          <option value="direct">全部直连</option>
+          <option value="global">全部代理</option>
+          <option value="rule">按规则</option>
+        </select>
+      </section>
+
+      <section id="globalProxySection" class="card hidden">
+        <label for="proxyInput">全局代理</label>
+        <select id="proxyInput"></select>
+      </section>
+
+      <section class="summary">
+        <div>
+          <span>代理数量</span>
+          <strong id="proxyCount">0</strong>
+        </div>
+        <div>
+          <span>规则数量</span>
+          <strong id="ruleCount">0</strong>
+        </div>
+      </section>
+
+      <p id="message" class="message"></p>
+
+      <footer>
+        <button id="optionsButton" type="button">打开设置</button>
+      </footer>
+    </main>
+
+    <script type="module" src="./popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,206 @@
+{
+    "rule-lisl89zt": {
+        "enabled": true,
+        "groupName": "文档",
+        "id": "rule-lisl89zt",
+        "ruleName": "飞书",
+        "urlMatches": [
+            {
+                "method": "includes",
+                "target": "hostname",
+                "value": "bytedance.larkoffice.com"
+            }
+        ]
+    },
+    "rule-lisldtki": {
+        "enabled": true,
+        "groupName": "ab",
+        "id": "rule-lisldtki",
+        "ruleName": "实验",
+        "urlMatches": [
+            {
+                "method": "includes",
+                "target": "href",
+                "value": "data.bytedance.net/libra/"
+            }
+        ]
+    },
+    "rule-lxadb34h": {
+        "enabled": true,
+        "groupName": "conf",
+        "id": "rule-lxadb34h",
+        "ruleName": "bc+tcc",
+        "urlMatches": [
+            {
+                "method": "includes",
+                "target": "href",
+                "value": "cloud.bytedance.net/byteconf-v2"
+            },
+            {
+                "method": "includes",
+                "target": "href",
+                "value": "cloud.bytedance.net/tcc"
+            }
+        ]
+    },
+    "rule-lxae2l7o": {
+        "enabled": true,
+        "groupName": "log",
+        "id": "rule-lxae2l7o",
+        "ruleName": "log",
+        "urlMatches": [
+            {
+                "method": "includes",
+                "target": "href",
+                "value": "cloud.bytedance.net/argos/streamlog/info_overview/log_id_search"
+            }
+        ]
+    },
+    "rule-lxae7n9i": {
+        "enabled": true,
+        "groupName": "抓包",
+        "id": "rule-lxae7n9i",
+        "ruleName": "抓包",
+        "urlMatches": [
+            {
+                "method": "includes",
+                "target": "href",
+                "value": "anywheredoor/proxy/share"
+            }
+        ]
+    },
+    "rule-lxae9jfp": {
+        "groupName": "argos",
+        "id": "rule-lxae9jfp",
+        "ruleName": "argos",
+        "urlMatches": [
+            {
+                "method": "includes",
+                "target": "href",
+                "value": "cloud.bytedance.net/argos"
+            }
+        ]
+    },
+    "rule-lxaeefkk": {
+        "enabled": true,
+        "groupName": "监控",
+        "id": "rule-lxaeefkk",
+        "ruleName": "监控",
+        "urlMatches": [
+            {
+                "method": "includes",
+                "target": "href",
+                "value": "grafana.sinf.net"
+            },
+            {
+                "method": "includes",
+                "target": "href",
+                "value": "metrics-fe.byted.org"
+            },
+            {
+                "method": "includes",
+                "target": "href",
+                "value": "tea-next/project"
+            },
+            {
+                "method": "includes",
+                "target": "href",
+                "value": "grafana.byted.org"
+            }
+        ]
+    },
+    "rule-lxb83x4i": {
+        "enabled": true,
+        "groupName": "mr",
+        "id": "rule-lxb83x4i",
+        "ruleName": "mr",
+        "urlMatches": [
+            {
+                "method": "includes",
+                "target": "href",
+                "value": "https://code.byted.org"
+            },
+            {
+                "method": "includes",
+                "target": "href",
+                "value": "merge_requests"
+            },
+            {
+                "method": "includes",
+                "target": "href",
+                "value": "code.byted.org"
+            }
+        ]
+    },
+    "rule-lxbgmcf1": {
+        "enabled": true,
+        "groupName": "admin",
+        "id": "rule-lxbgmcf1",
+        "ruleName": "后台",
+        "urlMatches": [
+            {
+                "method": "includes",
+                "target": "href",
+                "value": "novel.sinf.net/master"
+            },
+            {
+                "method": "includes",
+                "target": "href",
+                "value": "novel.boe.bytedance.net"
+            }
+        ]
+    },
+    "rule-lxbt17js": {
+        "enabled": true,
+        "groupName": "sinf",
+        "id": "rule-lxbt17js",
+        "ruleName": "sinf",
+        "urlMatches": [
+            {
+                "method": "includes",
+                "target": "href",
+                "value": "cloud.sinf.net"
+            }
+        ]
+    },
+    "rule-lxtux72g": {
+        "enabled": true,
+        "groupName": "dev",
+        "id": "rule-lxtux72g",
+        "ruleName": "接口/抓包",
+        "urlMatches": [
+            {
+                "method": "includes",
+                "target": "href",
+                "value": "https://bits.bytedance.net/env"
+            },
+            {
+                "method": "includes",
+                "target": "href",
+                "value": "bits.bytedance.net/workbench/tools/46"
+            },
+            {
+                "method": "includes",
+                "target": "href",
+                "value": "https://bits.bytedance.net/"
+            }
+        ]
+    },
+    "rule-mi4ap51m": {
+        "enabled": true,
+        "groupName": "other",
+        "id": "rule-mi4ap51m",
+        "ruleName": "other",
+        "urlMatches": [
+            {
+                "method": "includes",
+                "target": "href",
+                "value": "http"
+            }
+        ]
+    },
+    "meta": {
+        "name": "tab-groups-rules",
+        "version": 1
+    }
+}

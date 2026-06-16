@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Tab Group Helper",
+  "version": "0.1.0",
+  "description": "Automatically group Chrome tabs by custom rules.",
+  "permissions": [
+    "tabs",
+    "tabGroups",
+    "storage",
+    "sessions"
+  ],
+  "background": {
+    "service_worker": "src/background/service_worker.js"
+  },
+  "options_page": "src/options/options.html",
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_title": "Tab Group Helper"
+  }
+}

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tab Group Helper 设置</title>
+    <link rel="stylesheet" href="./options.css">
+  </head>
+  <body>
+    <main class="page">
+      <header class="header">
+        <div>
+          <h1>Tab Group Helper</h1>
+          <p>配置自动分组规则、全局策略和 JSON 导入导出。</p>
+        </div>
+        <button id="saveAll" class="primary">保存配置</button>
+      </header>
+
+      <section class="card">
+        <h2>全局设置</h2>
+        <div class="settings-grid">
+          <label class="checkbox-label"><input id="autoGroupEnabled" type="checkbox"><span>启用自动分组</span></label>
+          <label class="checkbox-label"><input id="runOnStartup" type="checkbox"><span>启动时整理已打开标签</span></label>
+          <label class="checkbox-label"><input id="includePinnedTabs" type="checkbox"><span>处理固定标签页</span></label>
+          <label>
+            同名分组策略
+            <select id="sameNameGroupPolicy">
+              <option value="single-instance">全局只保留一个同名组</option>
+              <option value="multi-instance">允许多窗口实例</option>
+            </select>
+          </label>
+          <label>
+            历史标签策略
+            <select id="historyTabPolicy">
+              <option value="keep">保留，分组再次命中时恢复</option>
+              <option value="clear">清空，不恢复历史标签</option>
+            </select>
+          </label>
+          <label>
+            手动整理默认范围
+            <select id="manualOrganizeDefaultScope">
+              <option value="current-window">当前窗口</option>
+              <option value="all-windows">全部窗口</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-title">
+          <h2>规则 JSON</h2>
+          <div class="actions">
+            <input id="importFile" type="file" accept="application/json,.json">
+            <button id="exportJson">导出 JSON</button>
+          </div>
+        </div>
+        <p class="hint">导入会覆盖当前规则；支持新格式和旧版 `urlMatches` 格式。</p>
+      </section>
+
+      <section class="layout">
+        <div class="card rules-panel">
+          <div class="section-title">
+            <h2>规则列表</h2>
+            <button id="newRule">新增规则</button>
+          </div>
+          <div id="rulesList" class="rules-list"></div>
+        </div>
+
+        <div class="card editor-panel">
+          <h2>规则编辑</h2>
+          <form id="ruleForm">
+            <input id="ruleId" type="hidden">
+            <label>规则名称 <input id="ruleName" required></label>
+            <label>分组名称 <input id="groupName" required></label>
+            <label class="checkbox-label"><input id="enabled" type="checkbox"><span>启用规则</span></label>
+            <label>
+              颜色模式
+              <select id="colorMode">
+                <option value="random">随机</option>
+                <option value="fixed">固定</option>
+              </select>
+            </label>
+            <label>
+              固定颜色
+              <select id="fixedColor">
+                <option value="grey">grey</option>
+                <option value="blue">blue</option>
+                <option value="red">red</option>
+                <option value="yellow">yellow</option>
+                <option value="green">green</option>
+                <option value="pink">pink</option>
+                <option value="purple">purple</option>
+                <option value="cyan">cyan</option>
+                <option value="orange">orange</option>
+              </select>
+            </label>
+
+            <div class="condition-header">
+              <h3>匹配条件</h3>
+              <button id="addCondition" type="button">增加条件</button>
+            </div>
+            <div id="conditions"></div>
+
+            <div class="actions form-actions">
+              <button class="primary" type="submit">应用到列表</button>
+              <button id="deleteRule" class="danger" type="button">删除规则</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <p id="status" class="status"></p>
+    </main>
+
+    <script src="../shared/constants.js"></script>
+    <script src="../shared/storage.js"></script>
+    <script src="./options.js"></script>
+  </body>
+</html>

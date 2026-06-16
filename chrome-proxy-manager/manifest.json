@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Chrome Proxy Manager",
+  "description": "Manage Chrome HTTP, HTTPS and SOCKS5 proxy rules with PAC.",
+  "version": "0.1.0",
+  "permissions": [
+    "proxy",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "src/background/service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Chrome Proxy Manager",
+    "default_popup": "src/popup/popup.html"
+  },
+  "options_page": "src/options/options.html"
+}
