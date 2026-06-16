@@ -44,16 +44,22 @@
     list.innerHTML = '';
 
     const rules = [...state.rules].sort((a, b) => a.priority - b.priority);
-    for (const rule of rules) {
+    for (const [index, rule] of rules.entries()) {
       const item = document.createElement('div');
       item.className = `rule-item${rule.id === selectedRuleId ? ' active' : ''}`;
       item.innerHTML = `
         <strong>${escapeHtml(rule.ruleName)} → ${escapeHtml(rule.groupName)}</strong>
-        <span class="rule-meta">${rule.enabled ? '启用' : '禁用'} · 优先级 ${rule.priority} · ${escapeHtml(conditionSummary(rule))}</span>
+        <span class="rule-meta">${rule.enabled ? '启用' : '禁用'} · 第 ${index + 1} 位 · 优先级 ${rule.priority} · ${escapeHtml(conditionSummary(rule))}</span>
         <span class="rule-meta">${rule.colorMode === 'fixed' ? `固定颜色 ${rule.fixedColor}` : '随机颜色'}</span>
         <span class="rule-actions">
           <button type="button" data-action="up">上移</button>
           <button type="button" data-action="down">下移</button>
+          <label class="priority-jump">
+            <span>移动到第</span>
+            <input type="number" data-action="position" min="1" max="${rules.length}" value="${index + 1}">
+            <span>位</span>
+          </label>
+          <button type="button" data-action="jump">移动</button>
         </span>
       `;
       item.addEventListener('click', () => {
@@ -68,6 +74,21 @@
       item.querySelector('[data-action="down"]').addEventListener('click', (event) => {
         event.stopPropagation();
         moveRule(rule.id, 1);
+      });
+      item.querySelector('[data-action="position"]').addEventListener('click', (event) => {
+        event.stopPropagation();
+      });
+      item.querySelector('[data-action="position"]').addEventListener('keydown', (event) => {
+        event.stopPropagation();
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          moveRuleToPosition(rule.id, event.currentTarget.value);
+        }
+      });
+      item.querySelector('[data-action="jump"]').addEventListener('click', (event) => {
+        event.stopPropagation();
+        const positionInput = item.querySelector('[data-action="position"]');
+        moveRuleToPosition(rule.id, positionInput.value);
       });
       list.appendChild(item);
     }
@@ -228,6 +249,37 @@
     renderRules();
     renderEditor();
     setStatus('规则优先级已调整，点击“保存配置”后生效。');
+  }
+
+  function moveRuleToPosition(ruleId, positionValue) {
+    const rules = [...state.rules].sort((a, b) => a.priority - b.priority);
+    const index = rules.findIndex((rule) => rule.id === ruleId);
+    if (index < 0) {
+      return;
+    }
+
+    const targetPosition = Number.parseInt(positionValue, 10);
+    if (!Number.isInteger(targetPosition) || targetPosition < 1 || targetPosition > rules.length) {
+      setStatus(`请输入 1 到 ${rules.length} 之间的位置。`, true);
+      return;
+    }
+
+    const targetIndex = targetPosition - 1;
+    if (targetIndex === index) {
+      setStatus('规则已经在目标位置。');
+      return;
+    }
+
+    const [rule] = rules.splice(index, 1);
+    rules.splice(targetIndex, 0, rule);
+    state.rules = rules.map((item, itemIndex) => ({
+      ...item,
+      priority: (itemIndex + 1) * 10
+    }));
+    selectedRuleId = ruleId;
+    renderRules();
+    renderEditor();
+    setStatus(`已移动到第 ${targetPosition} 位，点击“保存配置”后生效。`);
   }
 
   function deleteRule() {
