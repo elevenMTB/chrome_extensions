@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Duplicate Tab Resolver Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="card">
+        <h1>Duplicate Tab Resolver</h1>
+        <p class="subtitle">
+          Configure automatic duplicate tab handling, site rules, and recent actions.
+        </p>
+
+        <form id="settings-form" class="form">
+          <section class="section">
+            <h2>General</h2>
+
+            <label class="field checkbox-field">
+              <input id="enabled" name="enabled" type="checkbox" />
+              <span>Enable automatic duplicate tab handling</span>
+            </label>
+
+            <label class="field">
+              <span>Default behavior</span>
+              <select id="duplicate-strategy" name="duplicateStrategy"></select>
+            </label>
+
+            <div class="field-grid">
+              <label class="field">
+                <span>Undo window (seconds)</span>
+                <input
+                  id="undo-window-seconds"
+                  name="undoWindowSeconds"
+                  type="number"
+                  min="1"
+                  step="1"
+                />
+              </label>
+
+              <label class="field">
+                <span>Max history records</span>
+                <input
+                  id="max-action-history"
+                  name="maxActionHistory"
+                  type="number"
+                  min="1"
+                  step="1"
+                />
+              </label>
+            </div>
+          </section>
+
+          <section class="section">
+            <h2>Rules</h2>
+
+            <label class="field">
+              <span>Whitelist rules</span>
+              <textarea
+                id="whitelist"
+                name="whitelist"
+                rows="6"
+                placeholder="example.com&#10;*.internal.example.com&#10;localhost"
+              ></textarea>
+            </label>
+
+            <label class="field">
+              <span>Blacklist rules</span>
+              <textarea
+                id="blacklist"
+                name="blacklist"
+                rows="6"
+                placeholder="example.com&#10;*.internal.example.com&#10;localhost"
+              ></textarea>
+            </label>
+
+            <p class="hint">
+              Use one hostname rule per line. Supported formats: <code>example.com</code>,
+              <code>*.example.com</code>, <code>localhost</code>, <code>127.0.0.1</code>.
+              Whitelist rules win over blacklist rules.
+            </p>
+          </section>
+
+          <div class="actions">
+            <button type="submit">Save settings</button>
+            <span id="status-message" class="status" aria-live="polite"></span>
+          </div>
+        </form>
+
+        <section class="section history-section">
+          <div class="history-header">
+            <div>
+              <h2>Recent actions</h2>
+              <p class="hint">
+                Review the latest duplicate-tab actions and undo the most recent eligible one.
+              </p>
+            </div>
+
+            <div class="history-actions">
+              <button id="refresh-history-button" type="button" class="secondary-button">
+                Refresh
+              </button>
+              <button id="undo-button" type="button">Undo latest action</button>
+            </div>
+          </div>
+
+          <ul id="history-list" class="history-list"></ul>
+        </section>
+      </section>
+    </main>
+
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Duplicate Tab Resolver",
+  "version": "0.1.0",
+  "description": "Automatically handle duplicate tabs by URL with configurable default behavior and blacklist rules.",
+  "permissions": ["tabs", "storage"],
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
+  "options_page": "options.html",
+  "action": {
+    "default_title": "Duplicate Tab Resolver"
+  }
+}
