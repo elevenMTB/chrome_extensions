@@ -124,6 +124,35 @@
     return createGroupForTab(tab, rule, logicalName, logicalName, color);
   }
 
+  async function reconcileSingleInstanceGroup(rule, state, preferredGroupId) {
+    const logicalName = rule.groupName;
+    const snapshot = state.groupSnapshots[logicalName];
+    const snapshotGroup = snapshot ? await findGroupById(snapshot.lastKnownGroupId) : null;
+    const groups = await findGroupsByLogicalName(logicalName);
+    const preferredGroup = await findGroupById(preferredGroupId);
+    const primaryGroup = preferredGroup || snapshotGroup || groups[0] || null;
+    const color = chooseColor(rule, snapshot);
+
+    if (!primaryGroup) {
+      return null;
+    }
+
+    const duplicateGroups = groups.filter((group) => group.id !== primaryGroup.id);
+    await mergeDuplicateGroups(primaryGroup, duplicateGroups);
+    await groupUpdate(primaryGroup.id, {
+      title: logicalName,
+      color: primaryGroup.color || color
+    });
+    await TGH.Storage.updateGroupSnapshot(logicalName, {
+      displayName: logicalName,
+      color: primaryGroup.color || color,
+      lastKnownGroupId: primaryGroup.id,
+      lastKnownWindowId: primaryGroup.windowId,
+      lastRuleId: rule.id
+    });
+    return { ...primaryGroup, title: logicalName, color: primaryGroup.color || color };
+  }
+
   async function ensureMultiInstanceGroup(tab, rule, state) {
     const logicalName = rule.groupName;
     const snapshot = state.groupSnapshots[logicalName];
@@ -166,6 +195,7 @@
 
   TGH.GroupManager = {
     ensureTargetGroup,
+    reconcileSingleInstanceGroup,
     moveTabToGroup,
     findGroupsByLogicalName,
     isDisplayNameForLogical

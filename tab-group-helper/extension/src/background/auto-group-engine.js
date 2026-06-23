@@ -42,13 +42,16 @@
     const normalizedMovedTab = TGH.RuleMatcher.normalizeTab(movedTab);
 
     await TGH.HistoryRestoreManager.maybeRestoreHistoryTabs(group, rule, state.settings, normalizedMovedTab);
-    await TGH.HistoryRestoreManager.updateSnapshotFromGroup(group, rule.groupName, rule, state.settings);
+    const finalGroup = state.settings.sameNameGroupPolicy === 'single-instance'
+      ? (await TGH.GroupManager.reconcileSingleInstanceGroup(rule, state, group.id)) || group
+      : group;
+    await TGH.HistoryRestoreManager.updateSnapshotFromGroup(finalGroup, rule.groupName, rule, state.settings);
 
     return {
       skipped: false,
       tab: normalizedMovedTab,
       rule,
-      group
+      group: finalGroup
     };
   }
 
