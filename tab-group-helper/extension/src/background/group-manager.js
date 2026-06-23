@@ -81,7 +81,7 @@
       lastKnownWindowId: group.windowId,
       lastRuleId: rule.id
     });
-    return group;
+    return { ...group, tghCreatedForCurrentHit: true };
   }
 
   async function mergeDuplicateGroups(primaryGroup, duplicateGroups) {
