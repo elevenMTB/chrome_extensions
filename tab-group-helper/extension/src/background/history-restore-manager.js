@@ -56,7 +56,10 @@
     const state = await TGH.Storage.loadState();
     const snapshot = state.groupSnapshots[logicalName];
     const restoredGroups = (state.restoreState && state.restoreState.restoredGroups) || {};
-    if (!snapshot || !Array.isArray(snapshot.tabs) || !snapshot.tabs.length || restoredGroups[logicalName]) {
+    if (!snapshot || !Array.isArray(snapshot.tabs) || !snapshot.tabs.length) {
+      return { restored: 0 };
+    }
+    if (restoredGroups[logicalName] && !group.tghCreatedForCurrentHit) {
       return { restored: 0 };
     }
 

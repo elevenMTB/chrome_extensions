@@ -169,6 +169,8 @@ button.danger {
 
 .rule-actions {
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
@@ -176,6 +178,21 @@ button.danger {
   min-height: 28px;
   padding: 4px 8px;
   font-size: 12px;
+}
+
+.priority-jump {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.priority-jump input {
+  width: 56px;
+  min-height: 28px;
+  padding: 4px 6px;
+  text-align: center;
 }
 
 #ruleForm {
